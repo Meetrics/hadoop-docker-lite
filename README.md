@@ -1,23 +1,20 @@
 # Hadoop cluster - lite
-Build a lightweight hadoop cluster with below mentioned hadoop services. These versions match what Hortonworks HDP 2.3.4 distribution has.
+Build a lightweight hadoop cluster with below mentioned hadoop services.
+These versions match what Hortonworks HDP 2.3.4 distribution has.
 
+forked from: https://github.com/anair-it/hadoop-docker-lite
+>Dockerhub: https://hub.docker.com/r/anoopnair/
 
 ## Versions
 - Alpine Linux: latest
 - Debian: 8.3
 - Java: Open JDK 7
 - hadoop : 2.7.1
-- pig: 0.15.0
 - Zookeeper: 3.4.6
-- Hbase: 1.1.2
 - Kafka: 0.9.0.1
 - Kafka manager: latest
-- Storm: 0.10.0
-- Phoenix: 4.7.0
 
-Note: Hadoop and storm are built on Debian Linux and all others on Alpine Linux
-
->Dockerhub: https://hub.docker.com/r/anoopnair/
+Note: Hadoop is built on Debian Linux and all others on Alpine Linux
 
 ## Prerequsities
 - Install [Docker](https://docs.docker.com/engine/installation/)
@@ -59,8 +56,6 @@ OR
 
 
 ## Web UI
-- [HBASE](http://localhost:60010)
-- [Storm](http://localhost:49080)
 - [Kafka manager](http://localhost:9000)
 - [Hadoop cluster](http://localhost:8088)
 
@@ -71,19 +66,13 @@ Please go through below READMEs to get detailed information about each image
 - [Alpine base README](alpine-base/README.md)
 - [Debian base README](debian-base/README.md)
 - [Hadoop README](hadoop/README.md)
-- [Pig README](hadoop/pig/README.md)
 - [Zookeeper README](zookeeper/README.md)
-- [Hbase README](hbase/README.md)
 - [Kafka README](kafka/README.md)
-- [Storm README](storm/README.md)
 
 ## Reference
 - https://hub.docker.com/r/wurstmeister/kafka/
 - https://hub.docker.com/r/sheepkiller/kafka-manager/
-- https://hub.docker.com/r/wurstmeister/storm/
 - https://hub.docker.com/r/sequenceiq/hadoop-ubuntu/
 - http://sookocheff.com/post/docker/containerizing-zookeeper-a-guided-tour/
-- http://www.slideshare.net/fabiofumarola1/8a-setup-hbase
 - https://docs.docker.com/engine/userguide/intro/
 - https://docs.docker.com/compose/
-- https://phoenix.apache.org/
