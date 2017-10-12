@@ -1,5 +1,5 @@
 hadoop:
-  image: anoopnair/hadoop_debian:2.7.1
+  image: gia90/hadoop_debian:2.7.1
   hostname: hadoop
   ports:
     - "49707:49707"
@@ -16,7 +16,5 @@ hadoop:
     - "8040:8040"
     - "8042:8042"
     - "8088:8088"
-
-pig:
-  image: anoopnair/pig_hadoop_debian:0.15.0
-
+  volumes:
+    - ./hdfs-upload:/hdfs-uploaded

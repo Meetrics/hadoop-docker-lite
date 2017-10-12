@@ -7,13 +7,6 @@ zookeeper:
     file: zookeeper/docker-compose.yml
     service: zookeeper
 
-hbase:
-  extends:
-    file: hbase/docker-compose.yml
-    service: hbase
-  links:
-    - zookeeper:zk
-
 kafka:
   extends:
     file: kafka/docker-compose.yml
@@ -31,35 +24,7 @@ kafka-manager:
     - zookeeper:zk
     - kafka:kafka
 
-nimbus:
-  extends:
-    file: storm/docker-compose.yml
-    service: nimbus
-  links: 
-    - zookeeper:zk
-
-supervisor:
-  extends:
-    file: storm/docker-compose.yml
-    service: supervisor
-  links: 
-    - nimbus:nimbus
-    - zookeeper:zk
-
-ui:
-  extends:
-    file: storm/docker-compose.yml
-    service: ui
-  links: 
-    - nimbus:nimbus
-    - zookeeper:zk
-
 hadoop:
   extends:
     file: hadoop/docker-compose.yml
     service: hadoop
-
-pig:
-  extends:
-    file: hadoop/docker-compose.yml
-    service: pig

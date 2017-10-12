@@ -24,3 +24,6 @@ fi
 if [[ $1 == "-bash" ]]; then
   /bin/bash
 fi
+
+# Copy all the files in the mounted "hdfs-uploaded" volume to hdfs (where?)
+hdfs dfs -put /hdfs-uploaded/* /

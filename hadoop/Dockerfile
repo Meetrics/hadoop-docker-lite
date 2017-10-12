@@ -18,7 +18,7 @@ RUN rm -f /etc/ssh/ssh_host_dsa_key /etc/ssh/ssh_host_rsa_key /root/.ssh/id_rsa 
   && ssh-keygen -q -N "" -t rsa -f /root/.ssh/id_rsa \
   && cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
 
-RUN wget -O - http://mirror.reverse.net/pub/apache/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz | tar -xzf - -C /usr/local/ \
+RUN wget -O - https://archive.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz | tar -xzf - -C /usr/local/ \
   && cd /usr/local \
   && ln -s ./hadoop-$HADOOP_VERSION hadoop
 
@@ -37,6 +37,12 @@ ADD mapred-site.xml $HADOOP_PREFIX/etc/hadoop/mapred-site.xml
 ADD yarn-site.xml $HADOOP_PREFIX/etc/hadoop/yarn-site.xml
 
 RUN $HADOOP_PREFIX/bin/hdfs namenode -format
+
+# make hadoop/hdfs command tools available from cli
+ENV PATH $PATH:$HADOOP_PREFIX/bin
+
+# create hdfs_uploaded folder for the volume mount
+RUN mkdir /hdfs-uploaded 
 
 # fixing the libhadoop.so like a boss
 RUN rm  /usr/local/hadoop/lib/native/* \
@@ -68,4 +74,11 @@ RUN service ssh start && $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh && $HADOOP_PREF
 
 CMD ["/etc/bootstrap.sh", "-d"]
 
-EXPOSE 49707 50010 50020 50030 50070 50075 50090 8030 8031 8032 8033 8040 8042 8088 22
+# Hdfs ports
+EXPOSE 50010 50020 50030 50070 50075 50090
+#Yarn ports
+EXPOSE 8030 8031 8032 8033 8040 8042 8088
+#SSH port
+EXPOSE 22
+#Others ports
+EXPOSE 49707
