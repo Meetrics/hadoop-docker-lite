@@ -1,5 +1,5 @@
 kafka:
-  image: anoopnair/kafka_alpine:0.9.0.1
+  image: gia90/kafka_alpine:0.10.2.1
   hostname: kafka
   ports:
     - "9092:9092"
