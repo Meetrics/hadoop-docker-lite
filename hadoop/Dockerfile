@@ -41,8 +41,9 @@ RUN $HADOOP_PREFIX/bin/hdfs namenode -format
 # make hadoop/hdfs command tools available from cli
 ENV PATH $PATH:$HADOOP_PREFIX/bin
 
-# create hdfs_uploaded folder for the volume mount
-RUN mkdir /hdfs-uploaded 
+# create hdfs_upload folder for the volume mount and store its path as env variable
+ENV HDFS_UPLOAD /hdfs_upload
+RUN mkdir $HDFS_UPLOAD 
 
 # fixing the libhadoop.so like a boss
 RUN rm  /usr/local/hadoop/lib/native/* \
