@@ -1,3 +1,7 @@
+# :warning: THIS IS A PUBLIC REPO :warning:
+# :skull: Don't push private/confidantial code! :skull:
+
+
 # Hadoop cluster - lite
 Build a lightweight hadoop cluster with below mentioned hadoop services.
 These versions match what Hortonworks HDP 2.3.4 distribution has.
