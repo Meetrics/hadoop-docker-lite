@@ -1,5 +1,7 @@
-zookeeper:
-  image: anoopnair/zookeeper_alpine:3.4.6
-  hostname: zk
-  ports:
-    - "2181:2181"
+version: '2'
+services:
+  zookeeper:
+    image: anoopnair/zookeeper_alpine:3.4.6
+    hostname: zk
+    ports:
+      - "2181:2181"
