@@ -1,5 +1,5 @@
 hadoop:
-  image: gia90/hadoop_debian:2.7.1
+  image: meetrics/hadoop_debian:2.7.1
   hostname: hadoop
   ports:
     - "49707:49707"

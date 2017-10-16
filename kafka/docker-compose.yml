@@ -1,5 +1,5 @@
 kafka:
-  image: gia90/kafka_alpine:0.10.2.1
+  image: meetrics/kafka_alpine:0.10.2.1
   hostname: kafka
   ports:
     - "9092:9092"
