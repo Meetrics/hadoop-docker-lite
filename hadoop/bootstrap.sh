@@ -17,16 +17,22 @@ $HADOOP_PREFIX/sbin/start-dfs.sh
 $HADOOP_PREFIX/sbin/start-yarn.sh
 
 # Try to copy all the files in the mounted $HDFS_UPLOAD volume (if any) to hdfs root
-echo "Copying $HDFS_UPLOAD files into HDFS ..."
-if [ "$(ls -A $HDFS_UPLOAD)" ]; then
+echo "Copying $HDFS_UPLOAD files into HDFS, logging to $HDFS_UPLOAD_LOG ..."
+
+if [ "$(ls $HDFS_UPLOAD)" ]; then
+    echo "Polling HDFS till it exits SAFEMODE" > "$HDFS_UPLOAD_LOG"
     while true; do
-      hdfs dfs -put $HDFS_UPLOAD/* / 2> /dev/null
-      if [ $? -eq 0 ]; then
-    	  break
+      HDFS_SAFEMODE=$(hdfs dfsadmin -safemode get | grep "ON")
+      if [ -z "$HDFS_SAFEMODE" ]; then
+         echo "Safe mode is (finally) OFF!" >> "$HDFS_UPLOAD_LOG"
+         break
       fi
+      echo "$HDFS_SAFEMODE" >> "$HDFS_UPLOAD_LOG"
       sleep 1
     done
-    echo " '--> Files successfully copied!"
+    echo "Copying files to HDFS" >> "$HDFS_UPLOAD_LOG"
+    hdfs dfs -put $HDFS_UPLOAD/* / &>> "$HDFS_UPLOAD_LOG"
+    echo " '--> Files successfully copied! (exit code: $?)"
 else
     echo " '--> No file to copy"
 fi

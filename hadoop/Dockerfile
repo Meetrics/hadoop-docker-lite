@@ -43,6 +43,7 @@ ENV PATH $PATH:$HADOOP_PREFIX/bin
 
 # create hdfs_upload folder for the volume mount and store its path as env variable
 ENV HDFS_UPLOAD /hdfs_upload
+ENV HDFS_UPLOAD_LOG /var/log/hdfs_upload.log
 RUN mkdir $HDFS_UPLOAD 
 
 # fixing the libhadoop.so like a boss
