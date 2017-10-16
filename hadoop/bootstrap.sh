@@ -16,18 +16,20 @@ service ssh start
 $HADOOP_PREFIX/sbin/start-dfs.sh
 $HADOOP_PREFIX/sbin/start-yarn.sh
 
-# Try to copy all the files in the mounted $HDFS_UPLOAD volume to hdfs root
-echo "FIX ME! If the volume folder is empty it will NEVER exit the while here!"
-echo -n "Copy $HDFS_UPLOAD files into HDFS"
-while true; do
-  hdfs dfs -put $HDFS_UPLOAD/* / 2> /dev/null
-  if [ $? -eq 0 ]; then
-	  break
-  fi
-  echo -n "."
-  sleep 1
-done
-echo "OK!"
+# Try to copy all the files in the mounted $HDFS_UPLOAD volume (if any) to hdfs root
+echo "Copying $HDFS_UPLOAD files into HDFS ..."
+if [ "$(ls -A $HDFS_UPLOAD)" ]; then
+    while true; do
+      hdfs dfs -put $HDFS_UPLOAD/* / 2> /dev/null
+      if [ $? -eq 0 ]; then
+    	  break
+      fi
+      sleep 1
+    done
+    echo " '--> Files successfully copied!"
+else
+    echo " '--> No file to copy"
+fi
 
 
 
